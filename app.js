@@ -3,8 +3,15 @@ const nj = require('nunjucks');
 const app = express(); // creates an instance of an express application
 const port = 3000;
 const routes = require('./routes');
-app.use('/', routes);
+const bodyParser = require('body-parser'); 
+const socketio = require('socket.io');
 
+
+app.use(bodyParser.urlencoded({ extended: false })); 
+
+app.use(bodyParser.json()); 
+
+app.use('/', routes(io));
 
 app.use((req, res,next) => {
     console.log(req.method, req.path);
@@ -35,6 +42,8 @@ nj.configure('views', {
 
 
 
-app.listen(port, () => {
+var server = app.listen(port, () => {
     console.log("server listening");
 })
+
+var io = socketio.listen(server);
