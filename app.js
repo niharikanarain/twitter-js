@@ -2,6 +2,9 @@ const express = require( 'express' );
 const nj = require('nunjucks'); 
 const app = express(); // creates an instance of an express application
 const port = 3000;
+const routes = require('./routes');
+app.use('/', routes);
+
 
 app.use((req, res,next) => {
     console.log(req.method, req.path);
@@ -15,19 +18,19 @@ nj.configure('views', {
 }); // point nunjucks to the proper directory for templates
 
 
-app.get('/', (req, res) => {
-    const people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
-    res.render( 'index', {title: 'Hall of Fame', people: people} );
-    // nj.render('index.html', {
-    //     title: "An Example",
-    //     people: [ {name: 'Gandalf'}, {name: 'Frodo'}, {name: 'Hermione'}]
-    // }, function (err, output){
-    //     res.send(output); 
-    //     if (err) console.log(err); 
-    //     console.log("OUTPUT: ",output); 
-    // }); 
-    // res.status(200).send('Hello');
-});
+// app.get('/', (req, res) => {
+//     const people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
+//     res.render( 'index', {title: 'Hall of Fame', subtitle: 'Sub-Hall of fame', people: people} );
+//     // nj.render('index.html', {
+//     //     title: "An Example",
+//     //     people: [ {name: 'Gandalf'}, {name: 'Frodo'}, {name: 'Hermione'}]
+//     // }, function (err, output){
+//     //     res.send(output); 
+//     //     if (err) console.log(err); 
+//     //     console.log("OUTPUT: ",output); 
+//     // }); 
+//     // res.status(200).send('Hello');
+// });
 
 
 
