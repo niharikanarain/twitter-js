@@ -11,6 +11,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json()); 
 
+var server = app.listen(port, () => {
+    console.log("server listening");
+})
+var io = socketio.listen(server);
+
 app.use('/', routes(io));
 
 app.use((req, res,next) => {
@@ -42,8 +47,4 @@ nj.configure('views', {
 
 
 
-var server = app.listen(port, () => {
-    console.log("server listening");
-})
 
-var io = socketio.listen(server);
