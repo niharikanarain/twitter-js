@@ -19,7 +19,9 @@ var io = socketio.listen(server);
 app.use('/', routes(io));
 
 app.use((req, res,next) => {
-    console.log(req.method, req.path);
+    // res.on('finish', () => {
+    // })
+    console.log(req.method, req.path);            
     next();
 })
 
